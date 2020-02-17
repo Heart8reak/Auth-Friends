@@ -4,6 +4,7 @@ import { Link, Route, Switch } from 'react-router-dom'
 
 import Login from './components/Login'
 import Friends from './components/Friends'
+import Edit from './components/Edit'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -16,10 +17,10 @@ function App() {
               <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/friends">Friends List</Link>
+              <Link to="/edit-friends">Edit Friends</Link>
             </li>
             <li>
-              <Link to="/protected">Protected</Link>
+              <Link to="/friends">Protected</Link>
             </li>
           </ul>
 
@@ -27,6 +28,7 @@ function App() {
         </nav>
         <Switch>
           <ProtectedRoute excat path="protected" component={ProtectedRoute} />
+          <ProtectedRoute exact path="/edit-friends" component={Edit} />
           <ProtectedRoute exact path="/friends" component={Friends} />
           <Route exact path="/login" component={Login} />
         </Switch>
