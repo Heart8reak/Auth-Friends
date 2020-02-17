@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
+import { Card } from 'react-bootstrap'
+
 const Friends = () => {
     const [info, setInfo] = useState([])
 
@@ -20,9 +22,18 @@ const Friends = () => {
         <div>
             {info.map(friend =>
                 <section>
-                    <h3> Name: {friend.name}</h3>
+                    <Card bg="dark" style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>{friend.name}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{friend.age}</Card.Subtitle>
+                            <Card.Text>
+                                {friend.email}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    {/* <h3> Name: {friend.name}</h3>
                     <p>Age: {friend.age}</p>
-                    <p>Email: {friend.email}</p>
+                    <p>Email: {friend.email}</p> */}
                 </section>
             )}
 

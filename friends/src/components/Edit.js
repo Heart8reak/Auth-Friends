@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
+import { Form, Col, Row, Button } from 'react-bootstrap'
+
+
 const Edit = () => {
     const friendLayout = {
         name: "",
@@ -37,54 +40,93 @@ const Edit = () => {
 
     return (
         <section className="formField">
-
-            <form onSubmit={edit}>
+            <Form>
                 <h1>Edit a Friend</h1>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="text"
-                    placeholder="Age"
-                    name="age"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    onChange={handleChanges}
-                />
-                <button>Edit</button>
-            </form>
+                <Form.Group as={Row}>
+                    <Col sm="12">
+                        <Form.Control placeholder="Name" />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
 
-            <form onSubmit={remove}>
-                <h1>Delete a Friend</h1>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="text"
-                    placeholder="Age"
-                    name="age"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    onChange={handleChanges}
-                />
-                <button>Delete</button>
-            </form>
+                    <Col sm="12">
+                        <Form.Control placeholder="Age" />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="formPlainTextEmail">
+                    <Col sm="12">
+                        <Form.Control placeholder="Email" />
+                    </Col>
+                </Form.Group>
+                <Button variant="outline-secondary">Edit Friend</Button>
+            </Form>
+            <Form>
+                <h1>Delete Friend</h1>
+                <Form.Group as={Row}>
+                    <Col sm="12">
+                        <Form.Control placeholder="Name" />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
 
-        </section>
+                    <Col sm="12">
+                        <Form.Control placeholder="Age" />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="formPlainTextEmail">
+                    <Col sm="12">
+                        <Form.Control placeholder="Email" />
+                    </Col>
+                </Form.Group>
+                <Button variant="outline-secondary">Delete Friend</Button>
+            </Form>
+            {/* <form onSubmit={edit}>
+            <h1>Edit a Friend</h1>
+            <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                onChange={handleChanges}
+            />
+            <input
+                type="text"
+                placeholder="Age"
+                name="age"
+                onChange={handleChanges}
+            />
+            <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={handleChanges}
+            />
+            <button>Edit</button>
+        </form>
+
+        <form onSubmit={remove}>
+            <h1>Delete a Friend</h1>
+            <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                onChange={handleChanges}
+            />
+            <input
+                type="text"
+                placeholder="Age"
+                name="age"
+                onChange={handleChanges}
+            />
+            <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={handleChanges}
+            />
+            <button>Delete</button>
+        </form> */}
+
+        </section >
     )
 }
 

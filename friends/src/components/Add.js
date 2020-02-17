@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
+import { Form, Col, Row, Button } from 'react-bootstrap'
+
 
 const Add = () => {
     const addFriendLayout = {
@@ -33,28 +35,26 @@ const Add = () => {
     return (
         <section>
 
-            <form onSubmit={add}>
+            <Form onSubmit={add}>
                 <h1>Add a Friend</h1>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="text"
-                    placeholder="Age"
-                    name="age"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    onChange={handleChanges}
-                />
-                <button>Add</button>
-            </form>
+                <Form.Group as={Row}>
+                    <Col sm="12">
+                        <Form.Control placeholder="Name" />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row}>
+
+                    <Col sm="12">
+                        <Form.Control placeholder="Age" />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} controlId="formPlainTextEmail">
+                    <Col sm="12">
+                        <Form.Control placeholder="Email" />
+                    </Col>
+                </Form.Group>
+                <Button variant="outline-secondary">Add Friend</Button>
+            </Form>
         </section>
     )
 }

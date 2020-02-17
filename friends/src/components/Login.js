@@ -1,5 +1,7 @@
 import React from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { Form, Col, Row, Button } from 'react-bootstrap'
+
 
 
 class Login extends React.Component {
@@ -31,31 +33,30 @@ class Login extends React.Component {
                 localStorage.removeItem('token')
                 console.log('invalid login: ', err)
             })
-        console.log(localStorage)
+        // console.log(localStorage)
 
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={this.login}>
-                    <input
-                        type='text'
-                        name="username"
-                        value={this.state.credentials.username}
-                        onChange={this.handleChange}
-                    />
-                    <input
-                        type='password'
-                        name="password"
-                        value={this.state.credentials.password}
-                        onChange={this.handleChange}
-                    />
-                    <button>
-                        Log In
-                    </button>
-                </form>
-            </div>
+                <Form onSubmit={this.login}>
+                    <Form.Group as={Row}>
+
+                        <Col sm="12">
+                            <Form.Control placeholder="Username" />
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row} controlId="formPlainTextPassword">
+                        <Col sm="12">
+                            <Form.Control placeholder="Password" />
+                        </Col>
+                    </Form.Group>
+                    <Button variant="outline-secondary">Log in</Button>
+                </Form>
+
+            </div >
 
         )
     }
