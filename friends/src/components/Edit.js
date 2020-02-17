@@ -15,20 +15,6 @@ const Edit = () => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    const add = e => {
-        e.preventDefault()
-        setData({ ...data, id: Date.now() })
-        axiosWithAuth()
-            .post("friends", data)
-            .then(res => {
-                console.log("API Data: ", res)
-                setData(friendLayout)
-            })
-            .catch(error => {
-                console.log("No data for you buddy!", error)
-            })
-    }
-
     const edit = e => {
         e.prevetnDefault()
         axiosWithAuth()
@@ -51,29 +37,6 @@ const Edit = () => {
 
     return (
         <section className="formField">
-
-            <form onSubmit={add}>
-                <h1>Add a Friend</h1>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="text"
-                    placeholder="Age"
-                    name="age"
-                    onChange={handleChanges}
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    onChange={handleChanges}
-                />
-                <button>Add</button>
-            </form>
 
             <form onSubmit={edit}>
                 <h1>Edit a Friend</h1>
