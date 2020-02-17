@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
-const Friends = props => {
+const Friends = () => {
+    const [info, setInfo] = useState([])
+
+    useEffect(() => {
+        axiosWithAuth()
+            .get('/friends')
+            .then(res => {
+                console.log("Data from API: ", res.data)
+                setInfo(res.data)
+            })
+            .catch(error => {
+                console.log('You broke it!', error)
+            })
+    }, [])
+
     return (
         <div>
-            <h2> Name: {props.data.name}</h2>
-            <p>Age: {props.data.age}</p>
-            <p>Email: {props.data.email}</p>
+            {info.map(friend =>
+                <section>
+                    <h3> Name: {friend.name}</h3>
+                    <p>Age: {friend.age}</p>
+                    <p>Email: {friend.email}</p>
+                </section>
+            )}
+
         </div>
     )
 }
+
+export default Friends

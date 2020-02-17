@@ -3,6 +3,7 @@ import './App.css';
 import { Link, Route, Switch } from 'react-router-dom'
 
 import Login from './components/Login'
+import Friends from './components/Friends'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -12,10 +13,10 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/friends">Friends List</Link>
             </li>
             <li>
               <Link to="/protected">Protected</Link>
@@ -26,6 +27,7 @@ function App() {
         </nav>
         <Switch>
           <ProtectedRoute excat path="protected" component={ProtectedRoute} />
+          <ProtectedRoute exact path="/friends" component={Friends} />
           <Route exact path="/login" component={Login} />
         </Switch>
 
