@@ -1,66 +1,82 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
-import { Form, Col, Row, Button } from 'react-bootstrap'
+import { Form, Spinner } from 'react-bootstrap'
 
 
+const Login = props => {
+    const [login, setLogin] = useState({
+        username: "",
+        password: ""
+    })
+    const [loading, setLoading] = useState(false)
 
-class Login extends React.Component {
-    state = {
-        credentials: {
-            username: "",
-            password: ""
-        }
-    }
-
-    handleChange = e => {
-        this.setState({
-            credentials: {
-                ...this.state.credentials,
-                [e.target.name]: e.target.value
-            }
+    const handleChanges = e => {
+        setLogin({
+            ...login,
+            [e.target.name]: e.target.value
         })
     }
 
-    login = e => {
-        e.preventDefault()
+    const onSubmit = e => {
+        e.preventDefault();
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000);
         axiosWithAuth()
-            .post("/login", this.state.credentials)
+            .post("/login", login)
             .then(res => {
                 localStorage.setItem("token", res.data.payload)
-                this.props.history.push("/protected")
+                setLogin(login)
+                setLogin({
+                    username: "",
+                    password: ""
+                })
+                props.history.push("/friends")
             })
             .catch(err => {
-                localStorage.removeItem('token')
-                console.log('invalid login: ', err)
-            })
-        // console.log(localStorage)
-
+                localStorage.removeItem("token")
+                console.log("Sorry try to Log in again", err)
+            }, [])
     }
 
-    render() {
-        return (
-            <div>
-                <Form onSubmit={this.login}>
-                    <Form.Group as={Row}>
+    return (
+        <div>
+            {!loading ? (
+                <form onSubmit={onSubmit}>
+                    <Form.Control
+                        type="text"
+                        placeholder="Username"
+                        name="username"
+                        onChange={handleChanges}
+                        value={login.username}
+                    />
+                    <br />
+                    <Form.Control
+                        placeholder="Password"
+                        type="password"
+                        name="password"
+                        onChange={handleChanges}
+                        value={login.password}
+                    />
+                    <br />
+                    <button variant="outline-secondary">Log in</button>
+                </form>
+            ) : (
+                    <div>
+                        <Spinner variant="primary" animation="grow" />
+                        <Spinner variant="primary" animation="grow" />
+                        <Spinner variant="primary" animation="grow" />
+                    </div>
+                )}
+        </div >
 
-                        <Col sm="12">
-                            <Form.Control placeholder="Username" />
-                        </Col>
-                    </Form.Group>
+    )
 
-                    <Form.Group as={Row} controlId="formPlainTextPassword">
-                        <Col sm="12">
-                            <Form.Control placeholder="Password" />
-                        </Col>
-                    </Form.Group>
-                    <Button variant="outline-secondary">Log in</Button>
-                </Form>
 
-            </div >
-
-        )
-    }
 }
+
+
 
 
 export default Login

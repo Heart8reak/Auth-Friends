@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Friends from './components/Friends'
 import Add from './components/Add'
 import Edit from './components/Edit'
+import Logout from './components/Logout'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -14,27 +15,20 @@ function App() {
       <header className="App-header">
         <nav>
           <ul>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/add-friends">Add Friends</Link>
-            </li>
-            <li>
-              <Link to="/edit-friends">Edit Friends</Link>
-            </li>
-            <li>
-              <Link to="/friends">Protected</Link>
-            </li>
+            <Link to="/login">Login</Link>
+            <Link to="/add-friends">Add Friends</Link>
+            <Link to="/edit-friends">Edit Friends</Link>
+            <Link to="/friends">Friends</Link>
+            <Link to="/logoout">Logout</Link>
           </ul>
 
 
         </nav>
         <Switch>
-          <ProtectedRoute excat path="protected" component={ProtectedRoute} />
           <ProtectedRoute exact path="/add-friends" component={Add} />
           <ProtectedRoute exact path="/edit-friends" component={Edit} />
-          <ProtectedRoute exact path="/friends" component={Friends} />
+          <ProtectedRoute exact path="/logout" component={Logout} />
+          <ProtectedRoute excat path="/friends" component={Friends} />
           <Route exact path="/login" component={Login} />
         </Switch>
 

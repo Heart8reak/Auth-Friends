@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 
-import { Form, Col, Row, Button } from 'react-bootstrap'
+import { Form, Col, Row } from 'react-bootstrap'
 
 
 const Add = () => {
@@ -9,7 +9,7 @@ const Add = () => {
         name: "",
         age: "",
         email: "",
-        id: ""
+        id: Date.now()
     }
 
     const [data, setData] = useState(addFriendLayout)
@@ -20,7 +20,7 @@ const Add = () => {
 
     const add = e => {
         e.preventDefault()
-        setData({ ...data, id: Date.now() })
+        setData({ ...data })
         axiosWithAuth()
             .post("friends", data)
             .then(res => {
@@ -39,21 +39,37 @@ const Add = () => {
                 <h1>Add a Friend</h1>
                 <Form.Group as={Row}>
                     <Col sm="12">
-                        <Form.Control placeholder="Name" />
+                        <Form.Control
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                            onChange={handleChanges}
+                        />
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row}>
 
                     <Col sm="12">
-                        <Form.Control placeholder="Age" />
+                        <Form.Control
+                            type="text"
+                            name="age"
+                            placeholder="Age"
+                            onChange={handleChanges}
+                        />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} controlId="formPlainTextEmail">
+                <Form.Group as={Row}
+                    controlId="formPlainTextEmail">
                     <Col sm="12">
-                        <Form.Control placeholder="Email" />
+                        <Form.Control
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            onChange={handleChanges}
+                        />
                     </Col>
                 </Form.Group>
-                <Button variant="outline-secondary">Add Friend</Button>
+                <button variant="outline-secondary">Add Friend</button>
             </Form>
         </section>
     )

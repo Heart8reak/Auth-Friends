@@ -19,7 +19,7 @@ const Edit = () => {
     }
 
     const edit = e => {
-        e.prevetnDefault()
+        e.preventDefault()
         axiosWithAuth()
             .put(`/friends/${data.id}`, data)
             .then(res => {
@@ -40,27 +40,36 @@ const Edit = () => {
 
     return (
         <section className="formField">
-            <Form>
+            <Form onSubmit={edit}>
                 <h1>Edit a Friend</h1>
                 <Form.Group as={Row}>
                     <Col sm="12">
-                        <Form.Control placeholder="Name" />
+                        <Form.Control
+                            placeholder="Name"
+                            onChange={handleChanges}
+                        />
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row}>
 
                     <Col sm="12">
-                        <Form.Control placeholder="Age" />
+                        <Form.Control
+                            placeholder="Age"
+                            onChange={handleChanges}
+                        />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} controlId="formPlainTextEmail">
+                <Form.Group as={Row}>
                     <Col sm="12">
-                        <Form.Control placeholder="Email" />
+                        <Form.Control
+                            placeholder="Email"
+                            onChange={handleChanges}
+                        />
                     </Col>
                 </Form.Group>
                 <Button variant="outline-secondary">Edit Friend</Button>
             </Form>
-            <Form>
+            <Form onSubmit={remove}>
                 <h1>Delete Friend</h1>
                 <Form.Group as={Row}>
                     <Col sm="12">
@@ -73,7 +82,7 @@ const Edit = () => {
                         <Form.Control placeholder="Age" />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} controlId="formPlainTextEmail">
+                <Form.Group as={Row}>
                     <Col sm="12">
                         <Form.Control placeholder="Email" />
                     </Col>
